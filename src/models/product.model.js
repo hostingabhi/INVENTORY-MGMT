@@ -11,8 +11,11 @@ export default class ProductModel{
 
     }
     static update(productObj){
+        console.log(productObj)
         const index = products.findIndex((p)=> p.id == productObj.id);
+        console.log(index);
         products[index] = productObj;
+
     }
     static add(name, desc, price, imageUrl){
         let newProduct = new ProductModel(

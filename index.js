@@ -9,11 +9,12 @@ import session from 'express-session';
 import { auth } from './src/middlewares/auth.middleware.js'
 import cookieParser from 'cookie-parser';
 import { setLastVisit } from './src/middlewares/lastVisit.middleware.js';
-const port = 3000;
+const port = 3300;
 
 const server = express();
 
 server.use(express.static('public'));
+server.use(express.static('src/views'));
 //CookieParser
 server.use(cookieParser());
 // server.use();
@@ -45,13 +46,14 @@ server.get('/update-product/:id', auth, productCotroller.getUpdateProductView);
 server.post('/', auth,  uploadFile.single('imageUrl'), validationMiddleware, productCotroller.addNewProduct);
 server.post('/update-product', auth, productCotroller.postUpdateProduct)
 server.post("/delete-product/:id", auth, productCotroller.deleteProduct)
+//user controller routes
 server.get('/register',userController.getRegister);
 server.post('/register', userController.postRegister);
 server.get('/login',userController.getLogin);
 server.post('/login', userController.postLogin);
 server.get('/logout',userController.logout)
 
-server.use(express.static('src/views'))
+
 
 server.listen(port,()=>{
     console.log(`Server is listennin at http://localhost:${port}`);

@@ -26,7 +26,6 @@ addNewProduct(req,res, next){
 getUpdateProductView(req, res, next){
     //1. if product exists then return view
         const id = req.params.id;
-        console.log(id);
         const productFound = ProductModel.getById(id);
         if(productFound){
             res.render('update-product',{product:productFound, errorMessage:null, userEmail: req.session.userEmail});
